@@ -1,10 +1,10 @@
 package com.ecommerce.project.model;
 
-public class category {
+public class Category {
     private long categoryId;
     private String categoryname;
 
-    public category(long categoryId, String categoryname) {
+    public Category(long categoryId, String categoryname) {
         this.categoryId = categoryId;
         this.categoryname = categoryname;
     }
