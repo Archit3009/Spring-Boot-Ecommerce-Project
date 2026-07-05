@@ -9,13 +9,14 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private List<Category> categories = new ArrayList<>();
-
+    private Long nextid =1L;
     @Override
     public List<Category> getAllCategories(){
      return categories;
     }
     @Override
     public void createCategory(Category category){
+        category.setCategoryId(nextid++);
 categories.add(category);
     }
 }
