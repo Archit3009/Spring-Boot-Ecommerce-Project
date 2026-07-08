@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import com.ecommerce.project.model.Category;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 @RestController
+@RequestMapping("/api")
 public class categorycontroller {
 
     private CategoryService categoryservice;
@@ -22,19 +24,22 @@ public class categorycontroller {
         this.categoryservice = categoryservice;
     }
 
-    @GetMapping("/api/public/categories")
+//    @GetMapping("/api/public/categories")
+    @RequestMapping(value = "/public/categories",method=RequestMethod.GET)
     public ResponseEntity<List<Category>> getallcategories(){
         List<Category> allCategories = categoryservice.getAllCategories();
         return  new ResponseEntity<>(allCategories,HttpStatus.OK) ;
     }
 
-    @PostMapping("api/public/categories")
+//    @PostMapping("api/public/categories")
+@RequestMapping(value = "/public/categories",method=RequestMethod.POST)
     public ResponseEntity<String> createCategory(@RequestBody Category category){
         categoryservice.createCategory(category);
         return new ResponseEntity<>("Category added successfully",HttpStatus.OK);
     }
 
-    @DeleteMapping("/api/admin/categories/{categoryId}")
+//    @DeleteMapping("/api/admin/categories/{categoryId}")
+    @RequestMapping(value="/admin/categories/{categoryId}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId){
 
         try{
@@ -47,7 +52,8 @@ public class categorycontroller {
         }
     }
 
-    @PutMapping("/api/public/categories/{categoryId}")
+//    @PutMapping("/api/public/categories/{categoryId}")
+@RequestMapping(value="/public/categories/{categoryId}", method = RequestMethod.PUT)
     public ResponseEntity<String> updateCategory
             (@RequestBody Category category,
              @PathVariable Long categoryId){
